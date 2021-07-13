@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-
 import 'item_page.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class RestaurantPage extends StatelessWidget {
   RestaurantPage({required this.airportName});
@@ -24,25 +25,30 @@ class RestaurantPage extends StatelessWidget {
             children: [
               Text(
                 'Select Restaurant',
-                style: TextStyle(fontSize: 24),
+                style: GoogleFonts.lato(fontSize: 24),
               ),
               Expanded(
                 child: ListView(
                   children: [
                     RestaurantCard(
-                      name: "Restaurant 1",
+                      name: "R1",
+                      cuisines: 'South Indian',
                     ),
                     RestaurantCard(
-                      name: "Restaurant 2",
+                      name: "R2",
+                      cuisines: 'Italian',
                     ),
                     RestaurantCard(
-                      name: "Restaurant 3",
+                      name: "R3",
+                      cuisines: 'South Indian, Italian, American',
                     ),
                     RestaurantCard(
-                      name: "Restaurant 4",
+                      name: "R4",
+                      cuisines: 'Chinese',
                     ),
                     RestaurantCard(
-                      name: "Restaurant 5",
+                      name: "R5",
+                      cuisines: 'North Indian',
                     ),
                   ],
                 ),
@@ -56,9 +62,10 @@ class RestaurantPage extends StatelessWidget {
 }
 
 class RestaurantCard extends StatelessWidget {
-  RestaurantCard({required this.name});
+  RestaurantCard({required this.name, required this.cuisines});
 
   final String name;
+  final String cuisines;
 
   @override
   Widget build(BuildContext context) {
@@ -76,11 +83,59 @@ class RestaurantCard extends StatelessWidget {
         margin: EdgeInsets.symmetric(vertical: 10),
         child: Container(
           height: 150,
-          child: Center(
-            child: Text(
-              name,
-              style: TextStyle(color: Colors.black),
-            ),
+          padding: EdgeInsets.all(10),
+          child: Row(
+            children: [
+              Container(
+                height: 130,
+                width: 130,
+                decoration: BoxDecoration(
+                  color: Colors.black87,
+                  borderRadius: BorderRadius.circular(5),
+                ),
+                child: Center(
+                  child: Text(
+                    name,
+                    style: GoogleFonts.neucha(fontSize: 48, color: Colors.white),
+                  ),
+                ),
+              ),
+              SizedBox(
+                width: 10,
+              ),
+              Expanded(
+                child: Container(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        'Restaurant ' + name,
+                        style: GoogleFonts.alegreyaSans(
+                            fontSize: 22, fontWeight: FontWeight.w300),
+                      ),
+                      SizedBox(
+                        height: 10,
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        textBaseline: TextBaseline.ideographic,
+                        children: [
+                          Flexible(
+                            child: Text(
+                              cuisines,
+                              style: GoogleFonts.lato(fontWeight: FontWeight.w400, fontStyle: FontStyle.italic),
+                              textAlign: TextAlign.start,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ],
           ),
         ),
       ),
