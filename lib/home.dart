@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'restaurant_page.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:mongo_dart/mongo_dart.dart';
+import 'backend_test.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({
@@ -59,10 +61,13 @@ class AirportCard extends StatelessWidget {
 
   final Color cardColor = Color(0xFFFFE0B2);
 
+  final ar = GetAirports();
+
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
+        ar.deleteAirport('ar1');
         Navigator.push(context, MaterialPageRoute(builder: (context) {
           return RestaurantPage(
             airportName: name,
