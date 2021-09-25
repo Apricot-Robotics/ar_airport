@@ -31,24 +31,29 @@ class RestaurantPage extends StatelessWidget {
                 child: ListView(
                   children: [
                     RestaurantCard(
-                      name: "R1",
+                      name: "Subway",
+                      cuisines: 'American, Fast Food, Healthy',
+                      img: 'images/subway.png',
+                    ),
+                    RestaurantCard(
+                      name: "Shiv Sagar",
                       cuisines: 'South Indian',
+                      img: 'images/shivsagar.png',
                     ),
                     RestaurantCard(
-                      name: "R2",
-                      cuisines: 'Italian',
+                      name: "KFC",
+                      cuisines: 'American, Fast Food',
+                      img: 'images/kfc.jpeg',
                     ),
                     RestaurantCard(
-                      name: "R3",
-                      cuisines: 'South Indian, Italian, American',
+                      name: "Cafe Coffee Day",
+                      cuisines: 'Snacks, Coffee, Tea',
+                      img: 'images/ccd.jpeg',
                     ),
                     RestaurantCard(
-                      name: "R4",
-                      cuisines: 'Chinese',
-                    ),
-                    RestaurantCard(
-                      name: "R5",
-                      cuisines: 'North Indian',
+                      name: "Smoor",
+                      cuisines: 'Chocolates, Dessert',
+                      img: 'images/smoor.jpeg',
                     ),
                   ],
                 ),
@@ -62,10 +67,11 @@ class RestaurantPage extends StatelessWidget {
 }
 
 class RestaurantCard extends StatelessWidget {
-  RestaurantCard({required this.name, required this.cuisines});
+  RestaurantCard({required this.name, required this.cuisines, required this.img});
 
   final String name;
   final String cuisines;
+  final String img;
 
   @override
   Widget build(BuildContext context) {
@@ -79,7 +85,7 @@ class RestaurantCard extends StatelessWidget {
       },
       child: Card(
         elevation: 1,
-        color: Colors.orange[100],
+        color: Colors.orangeAccent,
         margin: EdgeInsets.symmetric(vertical: 10),
         child: Container(
           height: 150,
@@ -91,12 +97,14 @@ class RestaurantCard extends StatelessWidget {
                 width: 130,
                 decoration: BoxDecoration(
                   color: Colors.black87,
-                  borderRadius: BorderRadius.circular(5),
+                  borderRadius: BorderRadius.circular(10),
                 ),
                 child: Center(
-                  child: Text(
-                    name,
-                    style: GoogleFonts.neucha(fontSize: 48, color: Colors.white),
+                  child: Image.asset(
+                    img,
+                    fit: BoxFit.fill,
+                    width: 130,
+                    height: 130,
                   ),
                 ),
               ),
@@ -110,7 +118,7 @@ class RestaurantCard extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        'Restaurant ' + name,
+                        name,
                         style: GoogleFonts.alegreyaSans(
                             fontSize: 22, fontWeight: FontWeight.w300),
                       ),

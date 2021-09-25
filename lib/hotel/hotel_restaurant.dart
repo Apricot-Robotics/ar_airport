@@ -1,110 +1,110 @@
-import 'dart:math';
-
-import 'package:ar_airport/gate_page.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-class ItemPage extends StatelessWidget {
-  ItemPage({required this.restaurantName});
 
-  final String restaurantName;
+class Item {
+  Item(this.name, this.img, this.description);
+  String name = 'Chicken Pasta';
+  String img = 'images/bia.jpeg';
+  String description = 'Delicious!';
+}
+
+var menu = [
+  Item('Veg Pasta', 'images/veg_pasta.jpeg', 'Delicious!'),
+  Item('Veg Pasta', 'images/veg_pasta.jpeg', 'Delicious!'),
+  Item('Veg Pasta', 'images/veg_pasta.jpeg', 'Delicious!'),
+  Item('Veg Pasta', 'images/veg_pasta.jpeg', 'Delicious!'),
+  Item('Veg Pasta', 'images/veg_pasta.jpeg', 'Delicious!'),
+  Item('Veg Pasta', 'images/veg_pasta.jpeg', 'Delicious!'),
+  Item('Veg Pasta', 'images/veg_pasta.jpeg', 'Delicious!'),
+];
+
+class HotelRestaurantMenu extends StatelessWidget {
+  final String hotelRestaurantName;
+
+  HotelRestaurantMenu({required this.hotelRestaurantName});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: Colors.grey[150],
       appBar: AppBar(
         backgroundColor: Colors.black,
-        title: Text(this.restaurantName),
-        centerTitle: true,
+        title: Text(
+          this.hotelRestaurantName,
+          style: TextStyle(color: Colors.orange),
+        ),
+        leading: GestureDetector(
+          onTap: () {
+            return Navigator.pop(context);
+          },
+          child: Icon(
+            Icons.arrow_back, // add custom icons also
+            color: Colors.orange,
+            // size: 30,
+          ),
+        ),
+        actions: [
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: 20),
+            child: CircleAvatar(
+              backgroundColor: Colors.orange,
+              radius: 15,
+              child: Text(
+                'J',
+                style: TextStyle(color: Colors.black),
+              ),
+            ),
+          ),
+        ],
       ),
       body: SafeArea(
-        child: Container(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Padding(
-                padding: const EdgeInsets.only(
-                    left: 15.0, right: 15.0, top: 15.0, bottom: 10),
-                child: Text(
-                  'Items',
-                  style: TextStyle(fontSize: 24),
+        child: Column(
+          children: [
+            Container(
+              height: 6,
+              color: Colors.orange,
+            ),
+            Expanded(
+              child: Padding(
+                padding: EdgeInsets.symmetric(horizontal: 0, vertical: 5),
+                child: ListView(
+                  children: menu
+                      .map((item) => ItemCard(
+                            item: item,
+                          ))
+                      .toList(),
                 ),
               ),
-              Expanded(
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 15),
-                  child: ListView(
-                    children: [
-                      ItemCard(
-                        itemName: "Chicken Zinger Burger",
-                        itemDescription: "Try our juicy chicken zinger burger!",
-                        img: 'images/zinger_burger.jpeg',
-                      ),
-                      ItemCard(
-                        itemName: "Paneer Zinger Burger",
-                        itemDescription: "Try our new veb paneer burger!",
-                        img: 'images/kfc_paneer_burger.jpeg',
-                      ),
-                      ItemCard(
-                        itemName: "Chicken Popcorn",
-                        itemDescription: "Delicious bite sized fried chicken pieces!",
-                        img: 'images/kfc_popcorn.jpeg',
-                      ),
-                      ItemCard(
-                        itemName: "Chicken Bucket",
-                        itemDescription: "The best drumsticks you'll ever eat!",
-                        img: 'images/kfc_bucket.jpeg',
-                      ),
-                      ItemCard(
-                        itemName: "Chicken Wrap",
-                        itemDescription: "Try our new chicken wrap!",
-                        img: 'images/kfc_wrap.jpeg'
-                      ),
-                      ItemCard(
-                          itemName: "Chicken Rice Bowl",
-                          itemDescription: "Try our new chicken rice bowl!",
-                          img: 'images/kfc_rice_bowl.jpeg'
-                      ),
-                    ],
-                  ),
-                ),
+            ),
+            Container(
+              height: 4,
+              color: Colors.orange,
+            ),
+            GestureDetector(
+              onTap: () {},
+              child: Container(
+                height: 60,
+                color: Colors.black87,
+                child: Center(
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          "Next",
+                          style: TextStyle(fontSize: 24, color: Colors.orange),
+                        ),
+                        SizedBox(
+                          width: 10,
+                        ),
+                        Icon(
+                          Icons.arrow_forward_sharp,
+                          color: Colors.orange,
+                        ),
+                      ],
+                    )),
               ),
-              GestureDetector(
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) {
-                        return GatePage();
-                      },
-                    ),
-                  );
-                },
-                child: Container(
-                  height: 60,
-                  color: Colors.black87,
-                  child: Center(
-                      child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(
-                        "Next",
-                        style: TextStyle(fontSize: 24, color: Colors.white),
-                      ),
-                      SizedBox(
-                        width: 10,
-                      ),
-                      Icon(
-                        Icons.arrow_forward_sharp,
-                        color: Colors.white,
-                      ),
-                    ],
-                  )),
-                ),
-              ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );
@@ -112,11 +112,9 @@ class ItemPage extends StatelessWidget {
 }
 
 class ItemCard extends StatefulWidget {
-  ItemCard({required this.itemName, required this.itemDescription, required this.img});
+  ItemCard({required this.item});
 
-  final String itemName;
-  final String itemDescription;
-  final String img;
+  final Item item;
 
   @override
   _ItemCardState createState() => _ItemCardState();
@@ -127,9 +125,8 @@ class _ItemCardState extends State<ItemCard> {
   int itemCount = 0;
   @override
   Widget build(BuildContext context) {
-    return Card(
-      elevation: 1,
-      color: Colors.orangeAccent,
+    return Container(
+      color: Colors.white,
       margin: EdgeInsets.symmetric(vertical: 10),
       child: Container(
         padding: EdgeInsets.all(10),
@@ -141,7 +138,7 @@ class _ItemCardState extends State<ItemCard> {
             ClipRRect(
               borderRadius: BorderRadius.circular(5),
               child: Image.asset(
-                widget.img,
+                widget.item.img,
                 fit: BoxFit.fitHeight,
                 width: 130,
                 height: 130,
@@ -162,14 +159,14 @@ class _ItemCardState extends State<ItemCard> {
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         Text(
-                          widget.itemName,
+                          widget.item.name,
                           style: TextStyle(fontSize: 16),
                         ),
                         SizedBox(
                           height: 10,
                         ),
                         Text(
-                          widget.itemDescription,
+                          widget.item.description,
                           style: TextStyle(
                             fontSize: 12,
                             fontStyle: FontStyle.italic,

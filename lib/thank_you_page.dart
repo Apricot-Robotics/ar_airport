@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'backend_test.dart';
 
 class ThankYouPage extends StatelessWidget {
   const ThankYouPage({Key? key}) : super(key: key);
@@ -21,12 +23,23 @@ class ThankYouPage extends StatelessWidget {
           child: Padding(
             padding: const EdgeInsets.all(30.0),
             child: Expanded(
-              child: Text(
-                'Thank you! Your order will be arriving shortly...',
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  fontSize: 32,
-                ),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Icon(
+                    Icons.fastfood_rounded,
+                    size: 108,
+                    color: Colors.orange,
+                  ),
+                  SizedBox(height: 10,),
+                  Text(
+                    'Thank you! Your order will be arriving shortly...',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      fontSize: 32,
+                    ),
+                  ),
+                ],
               ),
             ),
           ),

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'thank_you_page.dart';
 import 'dart:async';
+import 'backend_test.dart';
 
 class GatePage extends StatefulWidget {
   GatePage();
@@ -11,6 +12,7 @@ class GatePage extends StatefulWidget {
 
 class _GatePageState extends State<GatePage> {
   int? gateNum = 0;
+  final ar = GetAirports();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -61,6 +63,7 @@ class _GatePageState extends State<GatePage> {
               ),
               GestureDetector(
                 onTap: () {
+                  ar.sendOrder();
                   Navigator.push(
                     context,
                     MaterialPageRoute(

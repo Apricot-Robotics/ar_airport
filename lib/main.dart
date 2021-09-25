@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
+import 'airport_home.dart';
 import 'home.dart';
-import 'restaurant_page.dart';
-import 'gate_page.dart';
-import 'dart:async';
 
 void main() {
   runApp(MyApp());
@@ -14,11 +12,8 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       home: HomePage(),
-      // initialRoute: '/',
-      // routes: {
-      //   '/': (context) => HomePage(),
-      // },
     );
   }
 }
